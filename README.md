@@ -1,41 +1,19 @@
 # Old Reload System
 
-CounterStrikeSharp plugin for CS2 servers.
-
-This is the small reload behavior plugin used on Ras El Hanout DZ. It keeps the package simple: copy the plugin folder, load it, play.
-
-Source is included under `src/OldReloadSystem`.
+Old reload behavior for CS2.
 
 ## Install
 
-Copy the `addons` folder into your server `csgo` directory:
+Copy `addons` into the server `csgo` folder.
 
 ```text
-game/csgo/addons/counterstrikesharp/plugins/OldReloadSystem/
+csgo/addons/counterstrikesharp/plugins/OldReloadSystem/
 ```
 
-Then reload CounterStrikeSharp plugins or restart the server.
-
-Console load command:
+Load it from console:
 
 ```text
 css_plugins load OldReloadSystem
-```
-
-## Files
-
-```text
-addons/
-  counterstrikesharp/
-    plugins/
-      OldReloadSystem/
-        OldReloadSystem.dll
-        OldReloadSystem.deps.json
-src/
-  OldReloadSystem/
-    OldReloadPlugin.cs
-    AmmoState.cs
-    OldReloadSystem.csproj
 ```
 
 ## Build
@@ -44,10 +22,6 @@ src/
 dotnet build src/OldReloadSystem/OldReloadSystem.csproj -c Release
 ```
 
-## Notes
+No config. No database.
 
-- Built for CounterStrikeSharp.
-- No database setup.
-- No server-specific config included.
-
-Made for Ras El Hanout DZ by Maximus.
+Maximus
