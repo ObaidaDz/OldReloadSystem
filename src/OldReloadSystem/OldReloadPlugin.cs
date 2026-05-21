@@ -7,18 +7,45 @@ namespace OldReloadSystem;
 public sealed class OldReloadPlugin : BasePlugin
 {
     private readonly Dictionary<ulong, Dictionary<string, AmmoState>> _playerAmmo = new();
+    private bool _loaded;
 
     public override string ModuleName => "OLD REALOAD IS BACK BABY WIIIIW";
-    public override string ModuleVersion => "4.9.0";
+    public override string ModuleVersion => "4.9.1";
     public override string ModuleAuthor => "Maximus";
 
     public override void Load(bool hotReload)
     {
-        RegisterListener<Listeners.OnTick>(() =>
+        _loaded = true;
+        RegisterListener<Listeners.OnTick>(OnTick);
+    }
+
+    public override void Unload(bool hotReload)
+    {
+        _loaded = false;
+    }
+
+    private void OnTick()
+    {
+        if (!_loaded)
         {
-            foreach (var player in Utilities.GetPlayers())
+            return;
+        }
+
+        CCSPlayerController[] players;
+        try
+        {
+            players = Utilities.GetPlayers().ToArray();
+        }
+        catch
+        {
+            return;
+        }
+
+        foreach (var player in players)
+        {
+            try
             {
-                if (player == null || !player.IsValid || player.PlayerPawn.Value == null)
+                if (player == null || !player.IsValid || player.PlayerPawn?.Value == null)
                 {
                     continue;
                 }
@@ -70,7 +97,10 @@ public sealed class OldReloadPlugin : BasePlugin
                     Utilities.SetStateChanged(weapon, "CBasePlayerWeapon", "m_pReserveAmmo");
                 }
             }
-        });
+            catch
+            {
+            }
+        }
     }
 
     [GameEventHandler(HookMode.Post)]
@@ -99,7 +129,7 @@ public sealed class OldReloadPlugin : BasePlugin
         _playerAmmo[player.SteamID][weaponName].Pool = pool;
         _playerAmmo[player.SteamID][weaponName].IsInitialized = false;
 
-        var activeWeapon = player.PlayerPawn.Value?.WeaponServices?.ActiveWeapon.Value;
+        var activeWeapon = player.PlayerPawn?.Value?.WeaponServices?.ActiveWeapon.Value;
         var activeWeaponName = activeWeapon?.DesignerName ?? string.Empty;
         if (activeWeapon != null && activeWeaponName == weaponName)
         {

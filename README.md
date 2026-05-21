@@ -2,9 +2,18 @@
 
 Small CounterStrikeSharp plugin for CS2 servers.
 
-I made this for Ras El Hanout DZ because the newer reload/ammo behavior did not feel right for the way we play. This plugin keeps a server-side ammo pool per player and weapon, then keeps the reserve ammo synced so reloads feel closer to the old style.
+The newer CS2 reload/ammo behavior can feel strange on community servers that want the older reserve-ammo rhythm. This plugin keeps a server-side ammo pool per player and weapon, then keeps reserve ammo synced so reloads feel closer to the old style.
 
 It is intentionally simple: no config, no database, no chat spam, no menu. Load it and play.
+
+## Latest
+
+`v4.9.1` is a small stability release:
+
+- Added a clean loaded/unloaded guard for the tick listener.
+- Avoids touching player/entity state while CS2 is shutting the entity system down.
+- Skips bad player/weapon states instead of spamming the server console.
+- Keeps the public package the same: copy `addons`, load the plugin, play.
 
 ## What It Does
 

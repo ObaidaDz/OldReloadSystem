@@ -18,3 +18,7 @@ css_plugins load OldReloadSystem
 ```
 
 If players are already mid-round, a respawn or rebuy will refresh the clean ammo state.
+
+## v4.9.1 note
+
+CS2 can briefly leave plugin tick callbacks alive while a map is ending, a plugin is unloading, or the entity system is not ready yet. The plugin now guards that path and exits quietly instead of trying to read players during that window.

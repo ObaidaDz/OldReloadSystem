@@ -1,6 +1,7 @@
 *.pdb
 bin/
 obj/
+publish/
 .vs/
 .idea/
 *.user

@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <AssemblyName>OldReloadSystem</AssemblyName>
     <RootNamespace>OldReloadSystem</RootNamespace>
-    <Version>4.9.0</Version>
+    <Version>4.9.1</Version>
     <Optimize>true</Optimize>
   </PropertyGroup>
 
